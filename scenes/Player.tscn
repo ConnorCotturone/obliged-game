@@ -1,0 +1,60 @@
+[gd_scene load_steps=11 format=3 uid="uid://bkv123ayihnev"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_ji8tj"]
+[ext_resource type="Script" path="res://scripts/player_state_machine.gd" id="2_xseud"]
+[ext_resource type="Script" path="res://scripts/idle_player_state.gd" id="3_tkhhg"]
+[ext_resource type="Script" path="res://scripts/run_player_state.gd" id="4_lj2gc"]
+[ext_resource type="Script" path="res://scripts/fall_player_state.gd" id="5_e68ek"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kyrow"]
+size = Vector3(0.4, 1.76, 0.25)
+
+[sub_resource type="Gradient" id="Gradient_gwfto"]
+offsets = PackedFloat32Array(0.266026, 1)
+colors = PackedColorArray(0, 0.266667, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kfwok"]
+gradient = SubResource("Gradient_gwfto")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mfilg"]
+albedo_color = Color(0.258824, 1, 1, 1)
+albedo_texture = SubResource("GradientTexture1D_kfwok")
+
+[sub_resource type="BoxMesh" id="BoxMesh_sxbi5"]
+material = SubResource("StandardMaterial3D_mfilg")
+size = Vector3(0.4, 1.75, 0.45)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_ji8tj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.881568, -0.011302)
+shape = SubResource("BoxShape3D_kyrow")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.884638, 0)
+mesh = SubResource("BoxMesh_sxbi5")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.67123, -0.0178384)
+
+[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("2_xseud")
+starting_state = NodePath("IdlePlayerState")
+
+[node name="IdlePlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("run_state", "fall_state")]
+script = ExtResource("3_tkhhg")
+run_state = NodePath("../RunPlayerState")
+fall_state = NodePath("../FallPlayerState")
+
+[node name="RunPlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "fall_state")]
+script = ExtResource("4_lj2gc")
+idle_state = NodePath("../IdlePlayerState")
+fall_state = NodePath("../FallPlayerState")
+
+[node name="FallPlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "run_state")]
+script = ExtResource("5_e68ek")
+idle_state = NodePath("../IdlePlayerState")
+run_state = NodePath("../RunPlayerState")

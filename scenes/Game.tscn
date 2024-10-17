@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8p5y8g55vooa"]
+
+[ext_resource type="PackedScene" uid="uid://bkv123ayihnev" path="res://scenes/Player.tscn" id="1_uchnr"]
+[ext_resource type="Shader" path="res://scripts/PixelShader.gdshader" id="2_0al2u"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_i2ef5"]
+size = Vector3(2, 0.5, 40)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i0xpl"]
+render_priority = 0
+shader = ExtResource("2_0al2u")
+shader_parameter/depth_threshold = 0.05
+shader_parameter/reverse_depth_threshold = 0.25
+shader_parameter/normal_threshold = 0.6
+shader_parameter/darken_amount = 0.3
+shader_parameter/lighten_amount = 1.5
+shader_parameter/normal_edge_bias = Vector3(1, 1, 1)
+shader_parameter/light_direction = Vector3(-0.96, -0.18, 0.2)
+
+[sub_resource type="QuadMesh" id="QuadMesh_f068h"]
+material = SubResource("ShaderMaterial_i0xpl")
+flip_faces = true
+size = Vector2(2, 2)
+
+[node name="Game" type="Node3D"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(576, 324)
+render_target_update_mode = 4
+
+[node name="Scenery" type="Node" parent="SubViewportContainer/SubViewport"]
+
+[node name="Floor" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Scenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("BoxMesh_i2ef5")
+
+[node name="Player" parent="SubViewportContainer/SubViewport/Scenery" instance=ExtResource("1_uchnr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0208552, 0)
+
+[node name="CameraMount" type="Node3D" parent="SubViewportContainer/SubViewport/Scenery/Player"]
+
+[node name="Camera" type="Camera3D" parent="SubViewportContainer/SubViewport/Scenery/Player/CameraMount"]
+transform = Transform3D(-4.27947e-08, -0.203727, 0.979028, -8.9052e-09, 0.979028, 0.203727, -1, 0, -4.37114e-08, 5.48993, 2.38518, 0)
+
+[node name="PostProcessing" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Scenery/Player/CameraMount/Camera"]
+transform = Transform3D(-4.27947e-08, -8.9052e-09, -1, -0.203727, 0.979028, 8.88178e-16, 0.979028, 0.203727, -4.37114e-08, 2.56366e-07, -1.23713, -5.86497)
+mesh = SubResource("QuadMesh_f068h")
+skeleton = NodePath("../../../../..")
+
+[node name="Lighting" type="Node" parent="."]
+
+[node name="Sun" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(0.309017, 0.945846, 0.0994125, 0, -0.104529, 0.994522, 0.951056, -0.307324, -0.0323011, 0, 8.73026, 4.17952)
