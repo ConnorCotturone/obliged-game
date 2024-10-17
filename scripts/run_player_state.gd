@@ -4,6 +4,8 @@ extends State
 var idle_state: State
 @export
 var fall_state: State
+@export
+var ground_jump_state: State
 
 @onready 
 var head: Node3D = $"../../Head"
@@ -12,6 +14,8 @@ var head: Node3D = $"../../Head"
 var player: Node3D = $"../../Visuals"
 
 func process_input(event: InputEvent) -> State:	
+	if Input.is_action_pressed('jump') and parent.is_on_floor():
+		return process_state_change(ground_jump_state)
 	return null
 
 func process_physics(delta: float) -> State:
