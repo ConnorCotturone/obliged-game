@@ -6,11 +6,13 @@ extends Node
 #@export
 #var animation_speed: float = 1.5
 
-var run_speed:          float = 8.2
-var fall_gravity:       float = 25.0
-var jump_gravity:       float = 5.0
-var wall_slide_gravity: float = .4
-var terminal_velocity: float  = -60.0
+var run_speed:                    float = 8.2
+var fall_gravity:                 float = 25.0
+var jump_gravity:                 float = 5.0
+var wall_slide_gravity:           float = 15.0
+var wall_slide_fall_gravity:      float = 45.0
+var wall_slide_terminal_velocity: float = -20.0
+var terminal_velocity:            float = -60.0
 
 var parent: Player
 

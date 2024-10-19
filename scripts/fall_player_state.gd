@@ -4,13 +4,15 @@ extends State
 var idle_state: State
 @export
 var run_state: State
+@export
+var wall_slide_state: State
 
 @onready var head: Node3D = $"../../Head"
 @onready var player: Node3D = $"../../Visuals"
 
 func process_physics(delta: float) -> State:
 	if parent.velocity.y > terminal_velocity:
-		#print("Fall Vel=", parent.velocity.y)
+		print("Fall Vel=", parent.velocity.y)
 		parent.velocity += Vector3(0.0, -fall_gravity, 0.0) * delta
 	
 	if parent.velocity.y < terminal_velocity:
@@ -29,6 +31,9 @@ func process_physics(delta: float) -> State:
 		parent.velocity.z = direction.z * run_speed
 	else:
 		parent.velocity.z = 0.0
+	
+	if parent.is_on_wall_only():
+		return process_state_change(wall_slide_state)
 	
 	if parent.is_on_floor():
 		if input_direction != 0:

@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://bkv123ayihnev"]
+[gd_scene load_steps=14 format=3 uid="uid://bkv123ayihnev"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ji8tj"]
+[ext_resource type="PackedScene" uid="uid://cb1m2vrfyb1c1" path="res://assets/models/main_player.glb" id="2_6sgb2"]
 [ext_resource type="Script" path="res://scripts/player_state_machine.gd" id="2_xseud"]
 [ext_resource type="Script" path="res://scripts/idle_player_state.gd" id="3_tkhhg"]
 [ext_resource type="Script" path="res://scripts/run_player_state.gd" id="4_lj2gc"]
 [ext_resource type="Script" path="res://scripts/fall_player_state.gd" id="5_e68ek"]
 [ext_resource type="Script" path="res://scripts/ground_jump_player_state.gd" id="6_ru70s"]
+[ext_resource type="Script" path="res://scripts/wall_slide_player_state.gd" id="8_dckg8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kyrow"]
 size = Vector3(0.4, 1.76, 0.25)
@@ -36,7 +38,11 @@ shape = SubResource("BoxShape3D_kyrow")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.884638, 0)
+visible = false
 mesh = SubResource("BoxMesh_sxbi5")
+
+[node name="main_player" parent="Visuals" instance=ExtResource("2_6sgb2")]
+transform = Transform3D(-1.66103e-08, 0, 0.38, 0, 0.38, 0, -0.38, 0, -1.66103e-08, 0, 0, 0)
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.67123, -0.0178384)
@@ -57,13 +63,20 @@ idle_state = NodePath("../IdlePlayerState")
 fall_state = NodePath("../FallPlayerState")
 ground_jump_state = NodePath("../GroundJumpPlayerState")
 
-[node name="FallPlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "run_state")]
+[node name="FallPlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "run_state", "wall_slide_state")]
 script = ExtResource("5_e68ek")
 idle_state = NodePath("../IdlePlayerState")
 run_state = NodePath("../RunPlayerState")
+wall_slide_state = NodePath("../WallSlidePlayerState")
 
-[node name="GroundJumpPlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("fall_state", "idle_state", "run_state")]
+[node name="GroundJumpPlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("fall_state", "idle_state", "run_state", "wall_slide_state")]
 script = ExtResource("6_ru70s")
 fall_state = NodePath("../FallPlayerState")
 idle_state = NodePath("../IdlePlayerState")
 run_state = NodePath("../RunPlayerState")
+wall_slide_state = NodePath("../WallSlidePlayerState")
+
+[node name="WallSlidePlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "fall_state")]
+script = ExtResource("8_dckg8")
+idle_state = NodePath("../IdlePlayerState")
+fall_state = NodePath("../FallPlayerState")

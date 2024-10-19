@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c8p5y8g55vooa"]
+[gd_scene load_steps=19 format=3 uid="uid://c8p5y8g55vooa"]
 
+[ext_resource type="PackedScene" uid="uid://b0wsdc01i3qph" path="res://assets/models/test-env-pirate.glb" id="1_iob2s"]
 [ext_resource type="PackedScene" uid="uid://dg4tf3qntyfp7" path="res://assets/models/test-platformer-scene2.glb" id="1_kohne"]
 [ext_resource type="PackedScene" uid="uid://crhj2fn3ldpb2" path="res://assets/models/test-platformer-scene.glb" id="1_n3nss"]
 [ext_resource type="PackedScene" uid="uid://bkv123ayihnev" path="res://scenes/Player.tscn" id="1_uchnr"]
 [ext_resource type="Shader" path="res://scripts/PixelShader.gdshader" id="2_0al2u"]
+[ext_resource type="PackedScene" uid="uid://114rxd2q62bs" path="res://assets/models/test-2-platformer-scene.glb" id="3_c0y0o"]
 
 [sub_resource type="Environment" id="Environment_p0b1t"]
 background_mode = 1
@@ -11,7 +13,28 @@ background_color = Color(0.219743, 0.295311, 0.483328, 1)
 background_energy_multiplier = 1.25
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ng6ft"]
-size = Vector3(1, 1, 64.2864)
+size = Vector3(1, 1, 30.6875)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f51qu"]
+size = Vector3(1.94861, 12.6684, 5.46985)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i7vd3"]
+size = Vector3(3.95015, 29.9355, 8.45923)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6mdb3"]
+size = Vector3(1.92154, 0.76709, 3.1604)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8nqel"]
+size = Vector3(1, 0.783691, 26.6961)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kr4r1"]
+size = Vector3(1, 1, 12.9834)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yvp76"]
+size = Vector3(1, 41.5706, 8.71106)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qas7e"]
+size = Vector3(1, 41.6995, 64.2438)
 
 [sub_resource type="BoxMesh" id="BoxMesh_i2ef5"]
 size = Vector3(2, 0.5, 40)
@@ -57,14 +80,54 @@ render_target_update_mode = 4
 [node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Scenery"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.475, -3.62019)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.356626, 1.888)
 shape = SubResource("BoxShape3D_ng6ft")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.108093, 9.19086, -5.15496)
+shape = SubResource("BoxShape3D_f51qu")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0292892, 0.524462, -17.0436)
+shape = SubResource("BoxShape3D_i7vd3")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014267, 2.96222, 18.3265)
+shape = SubResource("BoxShape3D_6mdb3")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014267, 6.05108, 23.3185)
+shape = SubResource("BoxShape3D_6mdb3")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.0017, 40.7826)
+shape = SubResource("BoxShape3D_8nqel")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.884638, -0.466279, 0, 0.466279, 0.884638, 0, -3.44393, 22.7391)
+shape = SubResource("BoxShape3D_kr4r1")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -26.765, 31.7439)
+shape = SubResource("BoxShape3D_yvp76")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -26.83, 73.445)
+shape = SubResource("BoxShape3D_qas7e")
+
+[node name="test-env-pirate" parent="SubViewportContainer/SubViewport/Scenery" instance=ExtResource("1_iob2s")]
+transform = Transform3D(2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, 0, -0.607376, 0)
 
 [node name="test-platformer-scene2" parent="SubViewportContainer/SubViewport/Scenery" instance=ExtResource("1_kohne")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.478, 0)
+visible = false
 
 [node name="test-platformer-scene" parent="SubViewportContainer/SubViewport/Scenery" instance=ExtResource("1_n3nss")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.477771, 0.0804043)
+visible = false
+
+[node name="test-2-platformer-scene" parent="SubViewportContainer/SubViewport/Scenery" instance=ExtResource("3_c0y0o")]
+transform = Transform3D(0.375316, 0, 0, 0, 0.375316, 0, 0, 0, 0.375316, 0, 0.900885, 0)
 visible = false
 
 [node name="Floor" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Scenery"]
@@ -78,7 +141,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0208552, 0)
 [node name="CameraMount" type="Node3D" parent="SubViewportContainer/SubViewport/Scenery/Player"]
 
 [node name="Camera" type="Camera3D" parent="SubViewportContainer/SubViewport/Scenery/Player/CameraMount"]
-transform = Transform3D(-4.27947e-08, -0.203727, 0.979028, -8.9052e-09, 0.979028, 0.203727, -1, 0, -4.37114e-08, 6.52918, 2.5156, 0)
+transform = Transform3D(-4.27947e-08, -0.203727, 0.979028, -8.9052e-09, 0.979028, 0.203727, -1, -4.44089e-15, -4.37114e-08, 8.2439, 2.80235, 0)
 
 [node name="PostProcessing" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Scenery/Player/CameraMount/Camera"]
 transform = Transform3D(-4.27947e-08, -8.9052e-09, -1, -0.203727, 0.979028, 8.88178e-16, 0.979028, 0.203727, -4.37114e-08, 2.56366e-07, -1.23713, -5.86497)
@@ -92,3 +155,6 @@ transform = Transform3D(-0.0579697, 0.947637, 0.314043, 0.750634, -0.166016, 0.6
 
 [node name="Sun2" type="DirectionalLight3D" parent="Lighting"]
 transform = Transform3D(-0.185028, 0.976642, 0.109243, -0.843243, -0.214869, 0.492719, 0.504683, -0.000951871, 0.863304, 5.4784, 45.7868, 50.5848)
+
+[node name="Sun3" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(-0.185028, 0.976642, 0.109243, -0.154604, -0.138707, 0.978191, 0.970496, 0.164103, 0.176657, -220.031, 201.842, 50.5848)

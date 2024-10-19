@@ -6,6 +6,8 @@ var fall_state: State
 var idle_state: State
 @export
 var run_state: State
+@export
+var wall_slide_state: State
 
 @export
 var jump_speed: float = 5.0
@@ -13,8 +15,6 @@ var jump_speed: float = 5.0
 var jump_velocity: float = 5.0
 @export
 var jump_peak_time: float = 0.45
-#@export
-#var jump_fall_time: float = 0.5
 @export
 var jump_height: float = 3.75
 @export
@@ -28,19 +28,15 @@ var player: Node3D = $"../../Visuals"
 
 func calculate_jump_parameters() -> void:
 	jump_gravity = (2 * jump_height) / pow(jump_peak_time, 2)
-	fall_gravity = (2 * jump_height) / pow(jump_peak_time, 2)	
 	jump_velocity = jump_gravity * jump_peak_time
 
 func enter() -> void:
-	#super()
-	#parent.velocity.y = -jump_force
 	pass
 
 func _ready() -> void:
 	calculate_jump_parameters()
 
 func process_physics(delta: float) -> State:
-	#print("Jump Vel=",parent.velocity.y)
 	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
 		parent.velocity.y = jump_velocity
 	
@@ -62,6 +58,9 @@ func process_physics(delta: float) -> State:
 	#else:
 	parent.velocity.z = direction.z * run_speed
 	parent.move_and_slide()
+	
+	if parent.is_on_wall_only():
+		return process_state_change(wall_slide_state)
 	
 	if parent.is_on_floor():
 		if input_direction != 0:
