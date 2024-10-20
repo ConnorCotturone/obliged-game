@@ -12,13 +12,12 @@ var wall_slide_state: State
 
 func process_physics(delta: float) -> State:
 	if parent.velocity.y > terminal_velocity:
-		print("Fall Vel=", parent.velocity.y)
 		parent.velocity += Vector3(0.0, -fall_gravity, 0.0) * delta
 	
 	if parent.velocity.y < terminal_velocity:
 		parent.velocity.y = terminal_velocity
 	
-	var input_direction = Input.get_axis('left', 'right') 
+	var input_direction = Input.get_axis('left', 'right')
 	
 	if input_direction == -1:
 		player.rotation = Vector3(0, PI, 0)

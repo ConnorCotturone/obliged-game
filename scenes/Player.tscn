@@ -1,16 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://bkv123ayihnev"]
+[gd_scene load_steps=15 format=3 uid="uid://bkv123ayihnev"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ji8tj"]
 [ext_resource type="PackedScene" uid="uid://cb1m2vrfyb1c1" path="res://assets/models/main_player.glb" id="2_6sgb2"]
 [ext_resource type="Script" path="res://scripts/player_state_machine.gd" id="2_xseud"]
-[ext_resource type="Script" path="res://scripts/idle_player_state.gd" id="3_tkhhg"]
-[ext_resource type="Script" path="res://scripts/run_player_state.gd" id="4_lj2gc"]
-[ext_resource type="Script" path="res://scripts/fall_player_state.gd" id="5_e68ek"]
-[ext_resource type="Script" path="res://scripts/ground_jump_player_state.gd" id="6_ru70s"]
-[ext_resource type="Script" path="res://scripts/wall_slide_player_state.gd" id="8_dckg8"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/idle_player_state.gd" id="3_tkhhg"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/run_player_state.gd" id="4_lj2gc"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/fall_player_state.gd" id="5_e68ek"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/ground_jump_player_state.gd" id="6_ru70s"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/wall_slide_player_state.gd" id="8_dckg8"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/wall_jump_player_state.gd" id="9_bacha"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kyrow"]
-size = Vector3(0.4, 1.76, 0.25)
+size = Vector3(0.4, 1.76, 0.270203)
 
 [sub_resource type="Gradient" id="Gradient_gwfto"]
 offsets = PackedFloat32Array(0.266026, 1)
@@ -30,8 +31,14 @@ size = Vector3(0.4, 1.75, 0.45)
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_ji8tj")
 
+[node name="LeftRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(0.05, 0, 0, 0, -2.18557e-09, 0.05, 0, -0.05, -2.18557e-09, 0, 1, 0.0681009)
+
+[node name="RightRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(0.05, 0, 0, 0, -2.18557e-09, -0.05, 0, 0.05, -2.18557e-09, 0, 1, -0.106781)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.881568, -0.011302)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.881568, -0.0185957)
 shape = SubResource("BoxShape3D_kyrow")
 
 [node name="Visuals" type="Node3D" parent="."]
@@ -76,7 +83,15 @@ idle_state = NodePath("../IdlePlayerState")
 run_state = NodePath("../RunPlayerState")
 wall_slide_state = NodePath("../WallSlidePlayerState")
 
-[node name="WallSlidePlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "fall_state")]
+[node name="WallSlidePlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "fall_state", "wall_jump_state")]
 script = ExtResource("8_dckg8")
 idle_state = NodePath("../IdlePlayerState")
 fall_state = NodePath("../FallPlayerState")
+wall_jump_state = NodePath("../WallJumpPlayerState")
+
+[node name="WallJumpPlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("fall_state", "idle_state", "run_state", "wall_slide_state")]
+script = ExtResource("9_bacha")
+fall_state = NodePath("../FallPlayerState")
+idle_state = NodePath("../IdlePlayerState")
+run_state = NodePath("../RunPlayerState")
+wall_slide_state = NodePath("../WallSlidePlayerState")

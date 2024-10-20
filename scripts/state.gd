@@ -11,7 +11,7 @@ var fall_gravity:                 float = 25.0
 var jump_gravity:                 float = 5.0
 var wall_slide_gravity:           float = 15.0
 var wall_slide_fall_gravity:      float = 45.0
-var wall_slide_terminal_velocity: float = -20.0
+var wall_slide_terminal_velocity: float = -5.5
 var terminal_velocity:            float = -60.0
 
 var parent: Player

@@ -41,9 +41,12 @@ func process_physics(delta: float) -> State:
 		parent.velocity.y = jump_velocity
 	
 	if parent.velocity.y < 0:
+		if parent.is_on_wall_only():
+			return process_state_change(wall_slide_state)
 		return process_state_change(fall_state)
 	
 	var input_direction = Input.get_axis('left', 'right') 
+
 	
 	if input_direction == -1:
 		player.rotation = Vector3(0, PI, 0)
@@ -58,9 +61,6 @@ func process_physics(delta: float) -> State:
 	#else:
 	parent.velocity.z = direction.z * run_speed
 	parent.move_and_slide()
-	
-	if parent.is_on_wall_only():
-		return process_state_change(wall_slide_state)
 	
 	if parent.is_on_floor():
 		if input_direction != 0:

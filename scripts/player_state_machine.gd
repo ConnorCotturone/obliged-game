@@ -24,7 +24,7 @@ func change_state(new_state: State) -> void:
 	current_state = new_state
 	current_state.enter()
 	print("Entering ", current_state.name, "\n")
-	
+
 # Pass through functions for the Player to call,
 # handling state changes as needed.
 func process_physics(delta: float) -> void:

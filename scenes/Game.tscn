@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://c8p5y8g55vooa"]
+[gd_scene load_steps=17 format=3 uid="uid://c8p5y8g55vooa"]
 
 [ext_resource type="PackedScene" uid="uid://b0wsdc01i3qph" path="res://assets/models/test-env-pirate.glb" id="1_iob2s"]
 [ext_resource type="PackedScene" uid="uid://dg4tf3qntyfp7" path="res://assets/models/test-platformer-scene2.glb" id="1_kohne"]
 [ext_resource type="PackedScene" uid="uid://crhj2fn3ldpb2" path="res://assets/models/test-platformer-scene.glb" id="1_n3nss"]
 [ext_resource type="PackedScene" uid="uid://bkv123ayihnev" path="res://scenes/Player.tscn" id="1_uchnr"]
 [ext_resource type="Shader" path="res://scripts/PixelShader.gdshader" id="2_0al2u"]
+[ext_resource type="PackedScene" uid="uid://dkoio77e701ia" path="res://assets/models/test-full-scene.glb" id="2_45vt2"]
 [ext_resource type="PackedScene" uid="uid://114rxd2q62bs" path="res://assets/models/test-2-platformer-scene.glb" id="3_c0y0o"]
 
 [sub_resource type="Environment" id="Environment_p0b1t"]
@@ -13,28 +14,19 @@ background_color = Color(0.219743, 0.295311, 0.483328, 1)
 background_energy_multiplier = 1.25
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ng6ft"]
-size = Vector3(1, 1, 30.6875)
+size = Vector3(1, 1, 1167.99)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_f51qu"]
-size = Vector3(1.94861, 12.6684, 5.46985)
+[sub_resource type="BoxShape3D" id="BoxShape3D_ed1qm"]
+size = Vector3(2.1391, 8.67966, 1.25818)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_i7vd3"]
-size = Vector3(3.95015, 29.9355, 8.45923)
+[sub_resource type="BoxShape3D" id="BoxShape3D_qxrpb"]
+size = Vector3(2.16235, 12.1176, 1.25342)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6mdb3"]
-size = Vector3(1.92154, 0.76709, 3.1604)
+[sub_resource type="BoxShape3D" id="BoxShape3D_s4n4k"]
+size = Vector3(2.09058, 1.41357, 1.53137)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8nqel"]
-size = Vector3(1, 0.783691, 26.6961)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_kr4r1"]
-size = Vector3(1, 1, 12.9834)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_yvp76"]
-size = Vector3(1, 41.5706, 8.71106)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_qas7e"]
-size = Vector3(1, 41.6995, 64.2438)
+[sub_resource type="BoxShape3D" id="BoxShape3D_aar37"]
+size = Vector3(2.16461, 1.28235, 1.49121)
 
 [sub_resource type="BoxMesh" id="BoxMesh_i2ef5"]
 size = Vector3(2, 0.5, 40)
@@ -80,43 +72,30 @@ render_target_update_mode = 4
 [node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Scenery"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.356626, 1.888)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.356626, -114.132)
 shape = SubResource("BoxShape3D_ng6ft")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.108093, 9.19086, -5.15496)
-shape = SubResource("BoxShape3D_f51qu")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00180054, 6.88802, -18.822)
+shape = SubResource("BoxShape3D_ed1qm")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0292892, 0.524462, -17.0436)
-shape = SubResource("BoxShape3D_i7vd3")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00939941, 5.55881, -22.9833)
+shape = SubResource("BoxShape3D_qxrpb")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014267, 2.96222, 18.3265)
-shape = SubResource("BoxShape3D_6mdb3")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0147705, 0.206787, 7.87741)
+shape = SubResource("BoxShape3D_s4n4k")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014267, 6.05108, 23.3185)
-shape = SubResource("BoxShape3D_6mdb3")
-
-[node name="CollisionShape3D6" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.0017, 40.7826)
-shape = SubResource("BoxShape3D_8nqel")
-
-[node name="CollisionShape3D7" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.884638, -0.466279, 0, 0.466279, 0.884638, 0, -3.44393, 22.7391)
-shape = SubResource("BoxShape3D_kr4r1")
-
-[node name="CollisionShape3D8" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -26.765, 31.7439)
-shape = SubResource("BoxShape3D_yvp76")
-
-[node name="CollisionShape3D9" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Scenery/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -26.83, 73.445)
-shape = SubResource("BoxShape3D_qas7e")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00894165, 1.59673, 18.3335)
+shape = SubResource("BoxShape3D_aar37")
 
 [node name="test-env-pirate" parent="SubViewportContainer/SubViewport/Scenery" instance=ExtResource("1_iob2s")]
 transform = Transform3D(2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, 0, -0.607376, 0)
+visible = false
+
+[node name="test-full-scene" parent="SubViewportContainer/SubViewport/Scenery" instance=ExtResource("2_45vt2")]
 
 [node name="test-platformer-scene2" parent="SubViewportContainer/SubViewport/Scenery" instance=ExtResource("1_kohne")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.478, 0)
